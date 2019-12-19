@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+    <script src="js/sockjs.min.js"></script>
+    <script>
+        var test = function () {
+            //var url = 'ws://localhost:8080/demo/myHandler';
+            //var sock = new WebSocket(url);
+            var url = 'http://localhost:8080/demo/myHandler';
+            var sock = new SockJS(url);
+
+            sock.onopen = function (ev) {
+                console.log('websocket onopen');
+                sock.send("hello world");
+            }
+
+            sock.onmessage = function (ev) {
+                console.log('receive data : ' + ev.data)
+            }
+
+            sock.onclose = function (ev) { console.log('websocket onclose') }
+
+            sock.onerror = function (ev) { console.log('websocket onerror') }
+        }
+
+    </script>
+<body>
+    <button onclick="test()">click</button>
+</body>
+</html>
